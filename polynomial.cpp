@@ -276,7 +276,9 @@ Polynomial Polynomial::operator-(const Polynomial &b) const {
 
             this_curr_ptr = this_curr_ptr->GetLink();
         } else if (this_curr_ptr->GetData().exp > b_curr_ptr->GetData().exp) {
-            result.poly.InsertFront(b_curr_ptr->GetData());
+            Term tmp_term;
+            tmp_term.Set(-(b_curr_ptr->GetData().coef), b_curr_ptr->GetData().exp);
+            result.poly.InsertFront(tmp_term);
 
             b_curr_ptr = b_curr_ptr->GetLink();
         } else {
@@ -303,7 +305,9 @@ Polynomial Polynomial::operator-(const Polynomial &b) const {
 
     // b.poly에 남아 있는 요소를 result에 전부 삽입
     while (tmp_b_last_ptr != b_curr_ptr) {
-        result.poly.InsertFront(b_curr_ptr->GetData());
+        Term tmp_term;
+        tmp_term.Set(-(b_curr_ptr->GetData().coef), b_curr_ptr->GetData().exp);
+        result.poly.InsertFront(tmp_term);
         b_curr_ptr = b_curr_ptr->GetLink();
     }
 
