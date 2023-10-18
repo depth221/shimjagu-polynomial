@@ -170,6 +170,7 @@ Polynomial Polynomial::operator+(const Polynomial &b) const {
     const ChainNode<Term> *b_last_ptr = b.poly.GetLast();
 
     // 한 바퀴를 돌 때까지 Node의 값을 읽은 후 임시 원형 리스트에 역순으로 삽입 
+    // this->poly의 임시 원형 리스트
     CircularList<Term> tmp_this;
     ChainNode<Term> *tmp_this_curr_ptr = this_last_ptr->GetLink();
     while (this_last_ptr != tmp_this_curr_ptr) {
@@ -178,6 +179,7 @@ Polynomial Polynomial::operator+(const Polynomial &b) const {
         tmp_this_curr_ptr = tmp_this_curr_ptr->GetLink();
     }
 
+    // b.poly의 임시 원형 리스트
     CircularList<Term> tmp_b;
     ChainNode<Term> *tmp_b_curr_ptr = b_last_ptr->GetLink();
     while (b_last_ptr != tmp_b_curr_ptr) {
@@ -246,6 +248,7 @@ Polynomial Polynomial::operator-(const Polynomial &b) const {
     const ChainNode<Term> *b_last_ptr = b.poly.GetLast();
 
     // 한 바퀴를 돌 때까지 Node의 값을 읽은 후 임시 원형 리스트에 역순으로 삽입 
+    // this->poly의 임시 원형 리스트
     CircularList<Term> tmp_this;
     ChainNode<Term> *tmp_this_curr_ptr = this_last_ptr->GetLink();
     while (this_last_ptr != tmp_this_curr_ptr) {
@@ -254,6 +257,7 @@ Polynomial Polynomial::operator-(const Polynomial &b) const {
         tmp_this_curr_ptr = tmp_this_curr_ptr->GetLink();
     }
 
+    // b.poly의 임시 원형 리스트
     CircularList<Term> tmp_b;
     ChainNode<Term> *tmp_b_curr_ptr = b_last_ptr->GetLink();
     while (b_last_ptr != tmp_b_curr_ptr) {
@@ -366,6 +370,7 @@ float Polynomial::Evaluate(float x) const {
     const ChainNode<Term> *this_last_ptr = poly.GetLast();
     ChainNode<Term> *this_curr_ptr = this_last_ptr->GetLink();
 
+    // 각 항별로 x를 대입한 후 result에 더함
     while (this_last_ptr != this_curr_ptr) {
         result += this_curr_ptr->GetData().coef * std::pow(x, this_curr_ptr->GetData().exp);
 
